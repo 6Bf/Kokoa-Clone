@@ -1,0 +1,213 @@
+#3.0 How to Add CSS to HTML
+html page에 css 추가 :
+1) 같은 html파일에 html코드와 css 코드를 놓기
+2) css와 html파일 분리하기
+
+<style> : 해당 파일은 반드시 html - <head>tag 안에 있어야 한다! 그 후 css코드를 작성한다.
+
+<link> : html파일 외부에 따로 css파일을 생성한 후 해당 파일을 html파일에 연결한다. 그 후 css파일에 작성한 css코드가 html파일에 자동으로 반영된다.
+
+==> 당연히 2)방법이 재사용측면, 가독성 측면에서 훨씬 좋은 방법이다!!!
+
+$배운거 : html파일에 css를 사용할 수 있는 2가지 방법을 학습하였다. 
+
+
+
+#3.1 Writing Our First CSS Lines
+CSS코드를 작성할때의 3가지 규칙 :
+1) CSS가 하는 일은 HTML 태그를 가리키는 일이다.
+ex) this tag is green
+이때 가리키는 것 자체를 "selector"라고 부른다. 그리고 지정해준 속성 값을 property라고 부른다.
+- blueTitle {
+    makecolorblue
+    25px
+}
+==> blueTitle -> selector, makecolorblue -> property
+
+2) CSS코드는 항상 줄 마지막에 ;을 꼭 붙여준다!!!
+ex) font-size: 25px;
+
+3) property명은 띄어쓰기를 사용하지 않는다. 반드시 -로 표시한다.
+ex) font-size
+
+px : css는 크기를 나타내는 다양한 단위가 있다.
+ex) px(pixels), em, point, %
+
+propery: value => 각 속성에는 그에 맞는 값을 넣어줘야 제대로 동작한다.
+
+===> CSS는 너무너무너무 많으므로 다 외우는건 미친짓이다. CSS를 제대로 동작시키는 방법을 숙지하고 필요한건 그때그때 구글링하자!!
+
+$ 배운거 : css코드를 작성하는 기본적인 규칙
+
+
+
+#3.2 What Does Cascading Mean
+CSS -> Cascading Style Sheet, 브라우저가 CSS를 읽을때 차례차례 읽는다는 의미이다.
+==> brower는 코드를 위에서 아래로 읽기 때문에, 같은 css선택자가 있을때 가장 마지막에 작성된 코드가 유효해진다.
+
+$ 배운거 : css의 의미, 코드해석순서
+
+
+
+#3.3 Blocks and Inlines (중요!!!!)
+Box *(엄청나게 중요!!!)*
+웹 사이트의 대부분의 요소는 box들로 이루어져 있음, box는 css에서 아주 중요한 요소 중 하나!!
+
+tag selector : css선택자로 tag를 선택하면 해당하는 모든 tag에 영향이간다.
+
+<div> : block형태이므로 옆에 아무것도 올 수 없다
+
+<span> : in-line형태이므로 줄바꿈 없이 옆에 요소가 계속계속 추가된다.
+
+==> block -> 옆에 아무것도 못온다(대부분의 요소), in-line -> 라인안에 계속 요소가 추가될 수 있다. (span, a, img)
+
+$ 배운거 : block, in-line의 개념과 차이, 각 속성을 갖는 tag들
+
+
+
+#3.4 Margin Part One (중요!!!)
+change block to in-line or //:
+1) <span>을 block으로 변경
+ex) display: block; (보통 default값은 inline)
+
+2) <div>를 inline으로 변경 -> div실종...?
+==> in-line요소는 높이와 너비를 가질 수 없음!!!! inline은 높이와 너비가 없다!!
+<div>a</div> 이렇게 내용을 넣어야 화면에 출력된다.
+
+==> block은 tag요소 자체에 높이와 너비를 가진다(box). 하지만 inline은 그런거 없다.
+
+Box(block)의 엄청난 특징
+1) margin : box의 border(경계)의 바깥에 있는 공간이다.
+2) padding : 
+3) border
+
+브라우저는 요소들에게 원지않은 많은 style 속성을 자동으로 부여한다.
+user agent stylesheet : 개발자도구에서 body요소에 확인가능하다
+--> 브라우저가 기본적으로 style 속성을 줬다는 의미이다.
+ex) display: box, margin: 8px
+
+margin- : maring값을 지정가능하다.
+ex) margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+
+$ 배운거 : block과 inline요소를 display를 이용해 변경가능, margin의 개념과 사용법
+
+
+
+#3.5 Margin Part Two
+margin값 설정 : 
+방향없이 margin: 10px; -> 상/하/좌/우 모두 적용됨
+margin: 20px 15px; -> 위/아래 좌/우 각각 적용됨
+margin: 20px 5px 12px 9px; -> 위, 오른쪽, 아래, 왼쪽 즉 시계방향으로 적용된다.
+
+collapsing margins :
+body margin: margin: 20px 5px 12px 99px;, div margin: margin: 80px 5px 12px 99px;
+이때 div뿐만이 아니라 body도 같이 밀려난다. 이는 div의 top margin이 body의 margin-top의 수치를 넘었기때문이다.
+==> 이러한 현상을 collapsing margin이라고 한다.
+==> div의 (top)경계(border)가 body의 (top)경계와 동일하다면, 이 두 요소는 하나의 요소(margin)로 취급되어 함께 움직이게된다.
+==> 위 현상은 위, 아래에서만 발생한다.
+==> 아! 경계가 같아서 margin이 같아졌구나 ㄷㄷㄷ
+
+$ 배운거 : margin의 방향별 값 설정, collapsing margins현상
+
+
+
+#3.6 Paddings and IDs (중요!!!)
+padding : margin과 반대되는 개념, box의 경계(border)로부터 안쪽에 있는 공간이다.
+ex) padding: 20px 10px; -> margin과 표기법이 동일하다!
+
+id selector :
+id를 선택자로 사용해 css요소를 지정할때는 #을사용하면된다.
+ex) #first {
+      background-color: red;
+}
+
+$ 배운거 : padding의 개념/사용법, id Selector사용법
+
+
+
+#3.7 Border (중요!!!)
+border : 말 그대로 box의 경계이다.
+ex) border: 2px solid black;
+ex) border-style: dotted; -> 한가지 요소만 적용하고싶을때 사용한다.
+<span>과 같은 inline역시 value만 있다면 border가 적용된다!!!
+
+* : html파일 전체의 요소를 의미한다.
+ex) * {
+
+}
+
+==> inline역시 border가 적용된다!!
+
+$ 배운거 : border의 개념/사용법, *{}로 전체tag의 속성 지정하기
+
+
+
+#3.8 Classes (중요!!!)
+inline :
+inline요소는 높이와 너비를 가질수 없다. -> margin을 줘도 위 아래에는 적용되지 않는다.
+padding -> margin과 다르게 상하좌우 모두 적용가능하다!!
+==> 실전에서 inline요소 위/아래에 margin을 주고 싶다면 inline 요소들을 block으로 바꿔야한다!
+==> inline은 다른것과 달리 일부만 적용되는 특성이 있다.
+ex) margin
+
+class :
+오직 하나의 고유한 값을 가져야 하는 id와는 다르게 class는 여러 요소에 부여 가능하다!
+ex) <span class="tomato hello honey">hello</span>
+.tomato {
+    background-color: tomato;
+}
+. -> class명이라는 의미이다!!
+
+$ 배운거 : class의 개념과 사용법
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
