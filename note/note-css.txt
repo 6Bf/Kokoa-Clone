@@ -283,7 +283,34 @@ $ 배운거 : 엘리먼트들의 레이어, position속성과 fixed의 개념/�
 
 
 #3.13 Relative Absolute
+position: static; : 
+레이아웃이 박스를 처음 위치하는 곳에 두는 속성이다.
 
+
+position: relative :
+가끔 조금씩만 오른쪽, 왼쪽으로 옮기고 싶을때 사용한다.
+엘리먼트가 처음 위치한 곳을 기준으로 엘리먼트의 위치를 조정한다.
+ex) <div>
+      <div class="green"></div>
+    </div>
+.green {
+     position: relative
+     top: -10;
+     left: 30px;
+}
+position: relative상태에서 top/left/bottom/right 를 이용하여 위치 값을 조정한다.
+--> 즉 엘리먼트가 처음 위치했던 값을 잘 기억해서 적용해야한다.
+
+
+// : absolute
+자신의 직계부모가 아닌 가장 가까운 relative부모를 기준으로 엘리먼트를 이동시켜준다.
+(없으면 가장 바깥쪽인 body를 기준으로 삼는다.)
+- 만약 body를 기준으로 하고싶지 않다면?
+--> 직계부모를 기준으로 하고 싶다면 부모 엘리먼트를 relative로 만든다.
+==> 결론 : absolute일 경우 relative한 부모를 찾지 못하면 가장 바깥족인 body를 기준으로 top/right/bottom/left를 활용하여 엘리먼트를 움직일 수 있다. 만약 기준을 삼고싶은 부모가 있다면 해당부모의 position을 relatvie로 설정한다.
+
+
+$ 배운거: static은 position의 default값이다. relative, absolute의 개념과 사용법을 공부했다.
 
 
 
