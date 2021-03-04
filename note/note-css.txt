@@ -165,6 +165,72 @@ $ 배운거 : class의 개념과 사용법
 
 
 
+#3.9 Inline Block
+div -> display: inline :
+div를 inline요소로 변경하면 높이와 너비를 가질 수 없으므로 배경색이 출력되지 않는다.
+
+div -> inline-block :
+inline상태에서 block으로 인식할 수 있게한다.
+1) 높이와 너비를 가질 수 있다. 즉, 사방에 margin을 적용 가능하다.
+2) inline의 특징인 요소 옆에 또다른 요소가 올 수 있다.
+3) 하지만 해당 요소는 레거시이고 문제점이 너무 많아 좋은속성이 아니다!!
+
+inline-block 문제점
+1) default값으로 지정된 문제
+- 요소사이에 빈공간 발생(의도x)
+2) 정해진 형식이 없다.
+- 넓이/높이를 크게 하면 자동으로 빈공간이 줄어든다.
+- 요소간의 크기대칭이 제각각이라 깔끔하지않다.
+3) Responsive Design(반응형 디자인)을 지원하지 않는다!!!!
+- margin-right등으로 대칭을 맞춘다.(옛날에는 실제로 이랬다고...) -> 다른 모니터로 접속하면 해당 모니터 크기에 따라
+레이아웃이 또 달라보인다. -> 좋망... (창 크기가 달라지면 영향을 받음)
+==> 결론적으로 "inline-block"은 사용하지 않는게 좋다!!!!!
+==> 이런 작업을 하고싶으면 "flex"를 사용하자!!!!
+
+$ 배운거: display의 요소인 inline, inline-block, inline-blcok의 문제점
+
+
+
+ 
+#3.10 Flexbox Part One (중요!!)
+flexbox :
+이름그대로 box요소들을 아주 유연하게 배치가능하다. 2d 레이아웃에서 아주 잘 동작한다!
+
+flexbox의 규칙 : flex-box를 사용할땐 아래 규칙들을 잘 준수해야한다.
+1) 자식 엘리먼트에는 어떤 것도 적지 말아야 한다. 반드시 부모 엘리먼트에 명시해야한다.
+ex)<main>
+    <div></div>
+    <div></div>
+    <div></div>
+   </main>
+만약 <div>에 flex-box를 적용하고 싶다면 <main>에게 속성을 적용해야한다.
+==> 즉, 자식에게 적용하기 위해서는 해당 요소의 부모 엘리먼트를 flex container로 만들어야한다.
+ex) main {
+      display: flex;
+}  <main>이 이제 자식인 <div>를 제어할 수 있다.
+
+
+flex-box 옵션 :
+1) justify-content :
+주축(main axis)을(기본적으로x축) 기준으로 요소들의 레이아웃을 설정한다.
+==> 요소간의 크기를 자동으로 계산해준다.
+
+2) align-items :
+교차축(cross axis)을 (기본적으로 y축) 기준으로 요소들의 레이아웃을 설정한다.
+- <div>는 <main>(부모)의 요소를 기준으로 움직인다. 따라서 <main>의 크기에 따라 <div>가 갈 수 있는 영향이 늘어난다.
+- 이때는 height: 100vh로 설정해주자! vh는 (viewport height)의 약어이다. viewport == screen이므로 100vh는 화면높이의 100%를 의미한다!!
+-> 따라서 부모자체가 height를 가지고 있지 않다면 (body) align-items는 제대로 작동하지 않는다. 따라서 따로 height를 적용해 줘야 잘 동작하므로 유의한다. 참고로 px보다는 화면크기를 기준으로 비율계산해주는 hv를 사용하는게 유용하다.
+
+==> 참고로 main axis와 cross axis는 언제든 축이 바뀔 수 있다.
+
+
+
+
+
+
+
+
+
 
 
 
