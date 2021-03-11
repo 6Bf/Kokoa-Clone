@@ -1,0 +1,605 @@
+#3.0 How to Add CSS to HTML
+html page에 css 추가 :
+1) 같은 html파일에 html코드와 css 코드를 놓기
+2) css와 html파일 분리하기
+
+<style> : 해당 파일은 반드시 html - <head>tag 안에 있어야 한다! 그 후 css코드를 작성한다.
+
+<link> : html파일 외부에 따로 css파일을 생성한 후 해당 파일을 html파일에 연결한다. 그 후 css파일에 작성한 css코드가 html파일에 자동으로 반영된다.
+
+==> 당연히 2)방법이 재사용측면, 가독성 측면에서 훨씬 좋은 방법이다!!!
+
+$배운거 : html파일에 css를 사용할 수 있는 2가지 방법을 학습하였다. 
+
+
+
+#3.1 Writing Our First CSS Lines
+CSS코드를 작성할때의 3가지 규칙 :
+1) CSS가 하는 일은 HTML 태그를 가리키는 일이다.
+ex) this tag is green
+이때 가리키는 것 자체를 "selector"라고 부른다. 그리고 지정해준 속성 값을 property라고 부른다.
+- blueTitle {
+    makecolorblue
+    25px
+}
+==> blueTitle -> selector, makecolorblue -> property
+
+2) CSS코드는 항상 줄 마지막에 ;을 꼭 붙여준다!!!
+ex) font-size: 25px;
+
+3) property명은 띄어쓰기를 사용하지 않는다. 반드시 -로 표시한다.
+ex) font-size
+
+px : css는 크기를 나타내는 다양한 단위가 있다.
+ex) px(pixels), em, point, %
+
+propery: value => 각 속성에는 그에 맞는 값을 넣어줘야 제대로 동작한다.
+
+===> CSS는 너무너무너무 많으므로 다 외우는건 미친짓이다. CSS를 제대로 동작시키는 방법을 숙지하고 필요한건 그때그때 구글링하자!!
+
+$ 배운거 : css코드를 작성하는 기본적인 규칙
+
+
+
+#3.2 What Does Cascading Mean
+CSS -> Cascading Style Sheet, 브라우저가 CSS를 읽을때 차례차례 읽는다는 의미이다.
+==> brower는 코드를 위에서 아래로 읽기 때문에, 같은 css선택자가 있을때 가장 마지막에 작성된 코드가 유효해진다.
+
+$ 배운거 : css의 의미, 코드해석순서
+
+
+
+#3.3 Blocks and Inlines (중요!!!!)
+Box *(엄청나게 중요!!!)*
+웹 사이트의 대부분의 요소는 box들로 이루어져 있음, box는 css에서 아주 중요한 요소 중 하나!!
+
+tag selector : css선택자로 tag를 선택하면 해당하는 모든 tag에 영향이간다.
+
+<div> : block형태이므로 옆에 아무것도 올 수 없다
+
+<span> : in-line형태이므로 줄바꿈 없이 옆에 요소가 계속계속 추가된다.
+
+==> block -> 옆에 아무것도 못온다(대부분의 요소), in-line -> 라인안에 계속 요소가 추가될 수 있다. (span, a, img)
+
+$ 배운거 : block, in-line의 개념과 차이, 각 속성을 갖는 tag들
+
+
+
+#3.4 Margin Part One (중요!!!)
+change block to in-line or //:
+1) <span>을 block으로 변경
+ex) display: block; (보통 default값은 inline)
+
+2) <div>를 inline으로 변경 -> div실종...?
+==> in-line요소는 높이와 너비를 가질 수 없음!!!! inline은 높이와 너비가 없다!!
+<div>a</div> 이렇게 내용을 넣어야 화면에 출력된다.
+
+==> block은 tag요소 자체에 높이와 너비를 가진다(box). 하지만 inline은 그런거 없다.
+
+Box(block)의 엄청난 특징
+1) margin : box의 border(경계)의 바깥에 있는 공간이다.
+2) padding : 
+3) border
+
+브라우저는 요소들에게 원지않은 많은 style 속성을 자동으로 부여한다.
+user agent stylesheet : 개발자도구에서 body요소에 확인가능하다
+--> 브라우저가 기본적으로 style 속성을 줬다는 의미이다.
+ex) display: box, margin: 8px
+
+margin- : maring값을 지정가능하다.
+ex) margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+
+$ 배운거 : block과 inline요소를 display를 이용해 변경가능, margin의 개념과 사용법
+
+
+
+#3.5 Margin Part Two
+margin값 설정 : 
+방향없이 margin: 10px; -> 상/하/좌/우 모두 적용됨
+margin: 20px 15px; -> 위/아래 좌/우 각각 적용됨
+margin: 20px 5px 12px 9px; -> 위, 오른쪽, 아래, 왼쪽 즉 시계방향으로 적용된다.
+
+collapsing margins :
+body margin: margin: 20px 5px 12px 99px;, div margin: margin: 80px 5px 12px 99px;
+이때 div뿐만이 아니라 body도 같이 밀려난다. 이는 div의 top margin이 body의 margin-top의 수치를 넘었기때문이다.
+==> 이러한 현상을 collapsing margin이라고 한다.
+==> div의 (top)경계(border)가 body의 (top)경계와 동일하다면, 이 두 요소는 하나의 요소(margin)로 취급되어 함께 움직이게된다.
+==> 위 현상은 위, 아래에서만 발생한다.
+==> 아! 경계가 같아서 margin이 같아졌구나 ㄷㄷㄷ
+
+$ 배운거 : margin의 방향별 값 설정, collapsing margins현상
+
+
+
+#3.6 Paddings and IDs (중요!!!)
+padding : margin과 반대되는 개념, box의 경계(border)로부터 안쪽에 있는 공간이다.
+ex) padding: 20px 10px; -> margin과 표기법이 동일하다!
+
+id selector :
+id를 선택자로 사용해 css요소를 지정할때는 #을사용하면된다.
+ex) #first {
+      background-color: red;
+}
+
+$ 배운거 : padding의 개념/사용법, id Selector사용법
+
+
+
+#3.7 Border (중요!!!)
+border : 말 그대로 box의 경계이다.
+ex) border: 2px solid black;
+ex) border-style: dotted; -> 한가지 요소만 적용하고싶을때 사용한다.
+<span>과 같은 inline역시 value만 있다면 border가 적용된다!!!
+
+* : html파일 전체의 요소를 의미한다.
+ex) * {
+
+}
+
+==> inline역시 border가 적용된다!!
+
+$ 배운거 : border의 개념/사용법, *{}로 전체tag의 속성 지정하기
+
+
+
+#3.8 Classes (중요!!!)
+inline :
+inline요소는 높이와 너비를 가질수 없다. -> margin을 줘도 위 아래에는 적용되지 않는다.
+padding -> margin과 다르게 상하좌우 모두 적용가능하다!!
+==> 실전에서 inline요소 위/아래에 margin을 주고 싶다면 inline 요소들을 block으로 바꿔야한다!
+==> inline은 다른것과 달리 일부만 적용되는 특성이 있다.
+ex) margin
+
+class :
+오직 하나의 고유한 값을 가져야 하는 id와는 다르게 class는 여러 요소에 부여 가능하다!
+ex) <span class="tomato hello honey">hello</span>
+.tomato {
+    background-color: tomato;
+}
+. -> class명이라는 의미이다!!
+
+$ 배운거 : class의 개념과 사용법
+
+
+
+#3.9 Inline Block
+div -> display: inline :
+div를 inline요소로 변경하면 높이와 너비를 가질 수 없으므로 배경색이 출력되지 않는다.
+
+div -> inline-block :
+inline상태에서 block으로 인식할 수 있게한다.
+1) 높이와 너비를 가질 수 있다. 즉, 사방에 margin을 적용 가능하다.
+2) inline의 특징인 요소 옆에 또다른 요소가 올 수 있다.
+3) 하지만 해당 요소는 레거시이고 문제점이 너무 많아 좋은속성이 아니다!!
+
+inline-block 문제점
+1) default값으로 지정된 문제
+- 요소사이에 빈공간 발생(의도x)
+2) 정해진 형식이 없다.
+- 넓이/높이를 크게 하면 자동으로 빈공간이 줄어든다.
+- 요소간의 크기대칭이 제각각이라 깔끔하지않다.
+3) Responsive Design(반응형 디자인)을 지원하지 않는다!!!!
+- margin-right등으로 대칭을 맞춘다.(옛날에는 실제로 이랬다고...) -> 다른 모니터로 접속하면 해당 모니터 크기에 따라
+레이아웃이 또 달라보인다. -> 좋망... (창 크기가 달라지면 영향을 받음)
+==> 결론적으로 "inline-block"은 사용하지 않는게 좋다!!!!!
+==> 이런 작업을 하고싶으면 "flex"를 사용하자!!!!
+
+$ 배운거: display의 요소인 inline, inline-block, inline-blcok의 문제점
+
+
+
+ 
+#3.10 Flexbox Part One (아주 중요!!)
+flexbox :
+이름그대로 box요소들을 아주 유연하게 배치가능하다. 2d 레이아웃에서 아주 잘 동작한다!
+
+flexbox의 규칙 : flex-box를 사용할땐 아래 규칙들을 잘 준수해야한다.
+1) 자식 엘리먼트에는 어떤 것도 적지 말아야 한다. 반드시 부모 엘리먼트에 명시해야한다.
+ex)<main>
+    <div></div>
+    <div></div>
+    <div></div>
+   </main>
+만약 <div>에 flex-box를 적용하고 싶다면 <main>에게 속성을 적용해야한다.
+==> 즉, 자식에게 적용하기 위해서는 해당 요소의 부모 엘리먼트를 flex container로 만들어야한다.
+ex) main {
+      display: flex;
+}  <main>이 이제 자식인 <div>를 제어할 수 있다.
+
+
+flex-box 옵션 :
+1) justify-content :
+주축(main axis)을(기본적으로x축) 기준으로 요소들의 레이아웃을 설정한다.
+==> 요소간의 크기를 자동으로 계산해준다.
+
+2) align-items :
+교차축(cross axis)을 (기본적으로 y축) 기준으로 요소들의 레이아웃을 설정한다.
+- <div>는 <main>(부모)의 요소를 기준으로 움직인다. 따라서 <main>의 크기에 따라 <div>가 갈 수 있는 영향이 늘어난다.
+- 이때는 height: 100vh로 설정해주자! vh는 (viewport height)의 약어이다. viewport == screen이므로 100vh는 화면높이의 100%를 의미한다!!
+-> 따라서 부모자체가 height를 가지고 있지 않다면 (body) align-items는 제대로 작동하지 않는다. 따라서 따로 height를 적용해 줘야 잘 동작하므로 유의한다. 참고로 px보다는 화면크기를 기준으로 비율계산해주는 hv를 사용하는게 유용하다.
+
+==> 참고로 main axis와 cross axis는 언제든 축이 바뀔 수 있다.
+
+$ 배운거 : flex-box의 개념/사용법, main axis & cross axis의 개념
+
+
+
+#3.11 Flexbox Part Two (아주 중요!!)
+main axis & cross axis :
+기본적으로 주축 -> x축, 교차축 -> y축이다.
+하지만 위 특성은 변경가능하다.
+
+flex-direction :
+1) row(수평) : 기본적인 옵션이다.
+2) column(수직) : y축을 기본으로 설정한다.
+--> 이제 반대로 설정가능하다.
+
+
+자식 엘리먼트로 flex-container만들기 :
+<main>
+  <div>1</div>
+<div>요소에게 1이라는 자식이 있으므로 <div>역시 flex-container가 될 수 있다.
+==> 즉, 부모의 부모가 flex더라도 직계부모요소가 flex가 아니라면 적용받지 않는다.
+
+
+wrapping : 화면크기에 따라 요소의 면적이 변하는 현상을 의미한다.
+flex-wrap 속성을 이용해 설정 가능하다. 기본적으로 no-wrap이 default속성이다.
+해당속성의 경우 요소의 크기가 변하더라도 요소들을 flex로 고정된 위치에 있도록 유지해준다.
+ex) flex-wrap: wrap
+위 속성을 적용하면 요소의 크기를 유지시켜주는 대신 고정된 축이 변화한다.
+==> 요소의 크기를 유지하고싶다 -> wrap, 요소의 크기가 변하더라도 위치된 축을 유지한다. -> nowrap
+
+
+flex-direction: column-reverse :
+요소들의 위치를 y축을 주축으로 거꾸로 뒤집는다.
+
+
+$ 배운거 : flex-direction으로 main과 cross axis를 변경하는방법, wrapping현상과 flex-wrap속성으로 wrap를 활성/비활성하는 방법,
+-reverse로 기존의 속성을 반전시키는 방법
+
+
+
+
+#3.12 Fixed (여기서부터 끝까지 전부 중요한거 같다.!!!)
+position :
+레이아웃보다는 위치를 아주 조금 위/오른쪽 등으로 옮기고 싶을 때 사용하는 프로퍼티이다.
+
+1) position: fixed;
+body의 height가 1000vh(현재 화면크기의 10배높이)일 경우 fixed상태인 해당 요소는 스크롤해도 고정된다.
+- fixed가 설정된 요소에 top/right/left/bottom 하나만 설정되어 있어도 다른요소에 상관없이 해당 위치에 고정된다.
+(서로다른 레이어에 있기때문에 block이든 margin이든 신경쓰지 않는다.)
+--> 즉, 위 4가지 요소중 하나만 수정해도 앞에 있는 레이어로 넘어간다.
+--> 참고로 left/right/top/bottom요소는 fixed상태일때만 활성화된다.
+--> 넷플릭스의 메뉴바가 이런 현상을 띈다.
+==> 즉, fixed를 사용하면 레이어를 부수고 다른 레이어에 위치할 수 있다!!!!! 어떤 요소들보다 가장 위에 위치하게된다!
+
+
+$ 배운거 : 엘리먼트들의 레이어, position속성과 fixed의 개념/사용법, fixed를 사용하면 기존 위치에 엘리먼트를 고정시킬 수 있다. fixed상태일 경우 top/right/bottom/left를 이용해서 레이어의 위치 값을 조정하고 기존 레이어에서 다른 엘리먼트들 보다 위 레이어로 요소를 이동시킬 수 있다.
+
+
+
+
+
+#3.13 Relative Absolute
+position: static; : 
+레이아웃이 박스를 처음 위치하는 곳에 두는 속성이다.
+
+
+position: relative :
+가끔 조금씩만 오른쪽, 왼쪽으로 옮기고 싶을때 사용한다.
+엘리먼트가 처음 위치한 곳을 기준으로 엘리먼트의 위치를 조정한다.
+ex) <div>
+      <div class="green"></div>
+    </div>
+.green {
+     position: relative
+     top: -10;
+     left: 30px;
+}
+position: relative상태에서 top/left/bottom/right 를 이용하여 위치 값을 조정한다.
+--> 즉 엘리먼트가 처음 위치했던 값을 잘 기억해서 적용해야한다.
+
+
+// : absolute
+자신의 직계부모가 아닌 가장 가까운 relative부모를 기준으로 엘리먼트를 이동시켜준다.
+(없으면 가장 바깥쪽인 body를 기준으로 삼는다.)
+- 만약 body를 기준으로 하고싶지 않다면?
+--> 직계부모를 기준으로 하고 싶다면 부모 엘리먼트를 relative로 만든다.
+==> 결론 : absolute일 경우 relative한 부모를 찾지 못하면 가장 바깥족인 body를 기준으로 top/right/bottom/left를 활용하여 엘리먼트를 움직일 수 있다. 만약 기준을 삼고싶은 부모가 있다면 해당부모의 position을 relatvie로 설정한다.
+
+
+$ 배운거: static은 position의 default값이다. relative, absolute의 개념과 사용법을 공부했다.
+
+
+
+
+#3.14 Pseudo Selectors part One (복잡함...)
+Pseudo Selectors :
+좀 더 세부적으로 엘리먼트를 선택해주는것, 일반적으로 css에서 선택자를 지정할때 사용하는 tag-name, id, class방법보다 더 세부적으로 선택자를 지정해주고 싶을때 사용한다.
+ex) span다음에 오는 class, 처음이나 마지막에 있는 클래스, etc...
+
+
+Pseudo Selectors 사용 :
+1) 5개의 <div>중 마지막 <div>의 배경색만 설정하고싶다?
+ex) div:last-child {
+      background-color: teal;
+}
+    div:first-child {
+      background-color: tomato;
+}
+--> 위 방법이 class나 id를 만드는 것 보다 훨씬 좋은방법이다. html코드의 수정없이 css만 건드렸기때문이다.
+
+2) 특정 차례의 엘리먼트를 설정하고싶다?
+span:nth-child()를 사용한다.
+ex)nth-child(3), (even), (odd), (2n), (2n+1), ...
+
+
+$ 배운거 : pseudo Selectors의 개념/사용법/프로퍼티
+
+
+
+
+#3.15 Combinators
+특정 태그의 자식태그에게만 css속성을 부여할 수 있다. :
+ex) p span {
+      color: red;
+}
+<p>My name is <span>Python</span> hohohoho</p>
+--> <p>태그의 자식인 <span></span>의 color만 red로 변한다.
+
+
+특정 tag의 바로 밑의 자식에게만 속성 부여 :
+<div>
+  <span>chicken</span>
+  <p>My name is <span>python</span> hohoho</p>
+</div>
+위 코드에서 바로 첫번째 자식인 <span>에게 속성을 주기위해
+
+p span {
+  color: red;
+}
+위 코드를 사용하면 <p>안에있는 <span>역시 가족tag이므로 속성이 부여된다. 만약 바로 직계 자식태그에게만 속성을 부여하고싶다면 아래와 같이 코드를 작성한다.
+ex) div > span {
+    color: red;
+}
+
+
+특정 tag의 다음 형제tag에게만 속성 부여 :
+<div>
+  <span>chicken</span>
+  <p>My name is <span>python</span> hohoho</p>
+  <span>Java</span>
+</div>
+위 코드에서 <span>Java</span>에게만 속성을 부여하기 위해서는 아래와 같이 한다.
+ex) p + span {
+      color: red;
+}
+
+
+===> p span -> p의 자식 혹은 후손tag <span>전체에게 속성을 부여한다.
+div > span -> div의 바로 아래 자식tag인 <span>에게만 속성을 부여한다.
+p + span -> p의 바로 다음에 오는 형제태그 <span>에게만 속성을 부여한다.
+
+
+$ 배운거 : Combinators의 사용법을 익혔다. (' ', '>', '+', '~')
+
+
+
+
+#3.16 Pseudo Selectors part Two
+~ :
+p + span의 경우 p바로 뒤에 오는 형제 span만 적용가능하다.
+<p>
+</p>
+<div>
+<span>
+위와 같은 경우에는 적용되지 않는다. 이때는 +대신 ~을 사용하면 해결된다.
+ex) p ~ span {
+    color: red;
+}
+
+특정 attribute를 가진 tag 선택하기 :
+ex) input:required {
+
+}
+input:optional
+input:[placeholder="user"]
+input[type="password"]
+input[placeholder~="name"]
+
+===> Pseudo Selectors는 상당히 많은 종류가있다. Pseudo Selectors의 개념을 확실히 이해하고 필요할때 마다 구글링해서 찾아쓴다.
+===> Pseudo Selectors는 세세하게 selector를 지정할때 사용한다.
+
+$ 배운거 : 더 다양한 Pseudo Selectors
+
+
+
+
+#3.17 States (중요!!!)
+states :
+개발자 도구 -> Styles ->Filter(:hov)
+==> active, focus, hover, visited, focus-within
+개발자 도구에서 확인할 수 있는 가장 중요한 Selector이다.
+
+
+active :
+특정 버튼을 클릭하고 있을때(active) 버튼의 상태를 설정해줄 수 있다.
+ex) button:active {
+      background-color: tomato;
+}
+button을 클릭하고 있을때 버튼의 배경색이 tomato가 된다.
+
+
+hover : 
+마우스가 특정 엘리먼트 위에 있을때 상태를 설정한다. 버튼을 예로 들때 버튼위에 마우스가 올려져 있을때의 상태이다. (클릭이 아니다!!!)
+ex) button:hover {
+      color: blue;
+}
+버튼위에 마우스 커서가 올려져 있으면 글자색이 blue가된다.
+
+
+focus :
+키보드로 선택되었을때 엘리먼트 상태를 설정한다.
+ex) input:focus {
+      background-color: tomato;
+}
+input창을 tab키로 선택할 때 배경색이 tomato로 변한다.
+
+
+visited :
+<a>에 많이 적용함, 한번 방문했던 링크에 대해 설정한다.
+ex) a:visited {
+      color: tomato;
+}
+<a>에 링크된 사이트에 접속한 기록이 있으면 tomato색깔로 변경된다. (시크릿 모드에서는 적용안된다.)
+
+
+focus-within :
+focused인 자식을 가진 부모 엘리먼트의 상태를 의미한다.
+<form>
+  <input>
+  <input>
+</form>
+위 코드에서 <input>엘리먼트가 focused상태일때 form의 상태를 설정할 수 있다.
+ex)
+form:focus-within {
+      border-color: blue;
+}
+--> form안에 있는 input이 focused상태라면 form의 border색깔이 blue로 변경된다.
+
+
+state를 다른 엘리먼트와 연계해서 사용 :
+ex) form:hover input {
+    background-color: sienna;
+}
+--> form이 hover상태일때 input의 상태를 설정할 수 있다.
+--> form안에 input이 존재해야 하며, 부모의 상태에 따라 자식엘리먼트의 상태를 설정할 수 있다.
+
+form:hover input:focus {
+    background-color: red;
+}
+위 방식으로 운용도 가능하다.
+
+
+$ 배운거 : states(active, hover, focus, visited, focus-within)의 개념/사용법을 공부했다.
+
+
+
+
+#3.18 Recap
+::placeholder 
+--> placeholder를 스타일링 할 수 있다.
+ex) input::placeholder {
+      color: yellowgreen;
+}
+--> placeholder의 글자색은 yellowgreen으로 변경되지만 input에 작성하는 text의 글씨는 여전히 black을 유지한다.
+
+
+::selection :
+text를 마우스로 드래그 했을때 상태를 설정해준다.
+ex) p::selection {
+      background-color: yellowgreen;
+}
+<p>tag안에 기술된 text를 드래그 하면 배경색이 yellowgreen으로 설정된다.
+
+
+$ 배운거 : ::placeholder등 특정 attibute의 상태를 설정하는 방법, CSS복습
+
+
+
+
+#3.19 Colors and Variables (아주 중요!!!!)
+컬러는 css에서 아주아주 중요하다!!! - 이름있는 컬러가 아닌 사용자 지정 컬러를 사용해야한다.
+
+css에서 알아야할 컬러 시스템은 3가지 정도가 있다.
+1) hexadecimal color(16진수 컬러)
+ex) p {
+      color: #fcce00;
+}
+
+2) rgb color
+ex) p {
+      color: rgb(252, 206, 0);
+}
+rgba도 사용 가능하다. 이때 a는 투명도를 의미한다.
+ex) p {
+      background-color: rgba(252, 206, 0, 1);
+}
+1 -> 투명도를 가지지 않는다. 0.5 -> 50%정도의 투명도를 가진다.
+
+
+custom property (Variables) :
+프로그램언어의 변수와 같은 기능을한다. 아주아주아주 중요하고 편리한 기능이다!!!!
+--> 색깔 정보를 변수로 저장해서 여러곳에 사용 가능하다.
+ex) :root {
+      --main-color: #fcce00;
+}
+--> 코드 전역(root)에서 사용할 수 있는 --main-color변수를 생성한 후 색깔 정보를 저장한다.
+
+생성한 변수는 아래와같이 사용가능하다.
+ex) p {
+      background-color: var(--main-color);
+}
+
+변수는 칼러값 이외에 다양한 값을 저장해서 활용할 수 있다.
+:root {
+  --default-border: 1px solid var(--main-color);
+}
+
+==> 변수명을 지을때는 --로 시작해서 빈공간은 -로 채워줘야한다.
+==> 변수를 사용할때는 var(--v-name)와 같이 사용한다.
+
+
+$ 배운거 : 컬러시스템과 custom property(variable)의 개념/사용법을 배웠다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

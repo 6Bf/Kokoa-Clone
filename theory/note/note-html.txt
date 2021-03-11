@@ -1,0 +1,117 @@
+#2.7 More Tags
+google에 html/css/js를 검색할때는 mdn키워드를 꼭 붙이기!
+mdn => 모질라사에서 제작한 사이트
+ex) google에 "html tag mdn" 이라고 검색하면 다양한 html tag를 확인할 수 있다!!!!!
+
+% mdn사이트에 있는 다양한 태그들 살펴보기
+(home.html에 기술해 놓았음)
+
+mdn의 장점으로 해당 태그의 attribute를 대부분 확인 가능함!
+
+$ 배운거 : mdn사이트에서 다양한 tag와 attribute들을 찾고 사용해보는 연습을 해보았다!!
+
+
+
+#2.8 Form Tags
+<form> && attribute
+form을 만들기 위해서는 <form></form>구조를 만든 뒤 그 안에 적당한 tag와 attribute들을 설정해준다.
+
+정확한 위치에 올바른 tag와 attribute값을 설정해야 브라우저가 제대로 해석하고 실행시킬 수 있다!!!
+
+*중요* 대부분의 tag를 기억할 필요 전혀 없다!!! tag를 작성하는 방법, 필요한 attribute를 (mdn에서)찾는 방법을 알면된다!!
+(구글링이 살길이다!!!!)
+ex) <tagname attrname="attrvalue">ffffff</tagname>
+
+$ 배운거 : form tag의 <input>tag와 각종 attribute 사용법!
+
+#2.9 More Tags and IDs
+(중요!!!) 이번 강의의 핵심은 id
+id는 body안에 어떤tag에도 넣을 수 있는 attribute
+1. id는 unique identifier(고유식별자)이기 때문이다.
+2. element(tag)당 1개의 id만 가질 수 있다!!
+3. id의 값은 전체 html파일에서 반드시 고유해야한다.
+4. id는 추후 css에서도 사용된다!!
+5. scription이나 css를 식별할려는 목적을 가진게 바로 id라는 attribute이다.
+
+$ 배운거 : <label>tag 사용법/ 좀 더 다양한 <input type>의 attribute/ id의 개념과 사용규칙
+
+
+
+#2.10 Semantic HTML (중요!!!)
+<div> : division, 박스를 생성해주는 tag이다. 요소를 box형태로 만들어 위,아래로 위치하게 해준다.
+의미론적으로 <div>는 아무런 값도 없는 box tag이다.
+
+<span> : 짧은 txt를 위한 tag이다. in-line형태이므로 줄바꿈이 발생하지 않는다.
+
+semantic : 문서를 보기만해도 그 의미를 짐작할 수 있는걸 말한다.
+
+<header></header> : div와 동일한 박스기능을 한다. 하지만 <div>와는 다르게 tag자체가 의미를 가지고 있다.
+ex) 어떤 페이지의 헤더(제목)를 의미함을 짐작할 수 있다.
+예전에는 <div id="header">방식을 사용했지만 지금은 <header>를 사용한다.
+
+<main> : 주로 메인이 되는 내용을 작성한다.
+
+<footer> : 꼬리말을 작성할때 사용된다.
+
+===> 물론 위 tag는 <div>로 대체가능하다. 하지만 진짜 개발자라면 document와 content를 명확하게 묘사 될수 있도록 semantic을 사용하자!! 코드가독성도 높아지고 코드만 보고도 어떤 기능을 하는 로직인지 단번에 파악이 가능하다!!!
+mdn에 "Content sectioning"을 검색하면 더 다양한 semantic을 찾아볼 수 있다!!!
+
+<header, main, footer> -> semantic
+<div, span> -> non-semantic
+
+$ 배운거 : semantic Html tag의 개념과 중요성, *** html code는 되도록 쉽게 읽을 수 있도록 작성하자!! ***
+
+
+
+#2.11 HTML Recap
+attribute value : attribute 값을 기술할때는 반드시 ""로 작성한다!!!! 진짜 중요핟!!!
+
+자주 사용하는 tag들은 외우는게 좋지만 모든 tag를 암기할 필요 없다!! 어렴풋이 기억하다 필요하면 구글링해서 사용한다.!!
+ex) nico쌤이 암기하는 것 -> header, main, footer, navigation, sidebar/aside
+
+$ 배운거 : html의 전체적인 복습, attribute를 기술할때는 반드시 ""사용하기, 구글링을 생활화하자!!!
+
+html 끝!!!!!!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

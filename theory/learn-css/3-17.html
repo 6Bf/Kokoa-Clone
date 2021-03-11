@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Study site</title>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        height: 1000vh;
+        margin: 50px;
+      }
+      button:active {
+        background-color: tomato;
+      }
+      button:hover {
+        color: blue;
+      }
+      input:focus {
+        background-color: tomato;
+      }
+      a:visited {
+        color: tomato;
+      }
+      a:hover {
+        color: teal;
+      }
+      a:focus {
+        color: tomato;
+      }
+      form {
+        border: 3px solid salmon;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      form:focus-within {
+        border-color: blue;
+      }
+      form:hover input {
+        background-color: sienna;
+      }
+      form:hover input:focus {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- States -->
+    <button>
+      Hello
+    </button>
+    <div>
+      <input type="text" />
+      <input type="text" />
+    </div>
+    <a id="naver" href="https://www.naver.com">초록창</a>
+    <form>
+      <input type="text" name="" id="">
+      <input type="text" name="" id="">
+      <input type="text" name="" id="">
+    </form>
+  </body>
+</html>
