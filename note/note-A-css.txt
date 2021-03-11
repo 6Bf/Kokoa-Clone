@@ -1,0 +1,206 @@
+#4.0 Transitions
+Transitions :
+기본적으로 어떤 상태에서 다른 상태로의 "변화"를 애니메이션으로 만드는 방법이다.
+
+1) transition이라는 속성은 state가 없는 요소에 붙어야한다.
+ex) a{}, a:hover{} 중 전자쪽에 붙여야한다.
+a {
+  transition: background-color 10s ease-in-out, color 5s ease-in-out;
+  transition: all 5s ease-in-out;
+}
+--> 여기서 반드시 hover등 상태가 변하는 state가 꼭 설정되있어야한다. transition이 상태가 변하는 요소를 찾아서 설정된 값으로 애니메이션화 시켜주기 때문이다.
+--> transition은 반드시 state가 아닌 root:element에 기술되 있어야한다.
+
+
+$ 배운거: transition의 개념/사용법에 대해 학습하였다.
+
+
+
+#4.1 Transitions part Two
+ease-in function :
+브라우저에게 애니메이션이 어떻게 변할지 말해주는 것이다.
+
+1) default :
+(linear, ease-in, ease-in-out, ease-out, ease)
+css easing Animation
+위 키워드를 검색하면 다양한 ease-in function을 확인 가능하다.
+
+2) cubic-bezier :
+애니메이션 효과의 움직임을 세밀하게 조정할 수 있다.
+ex) a{
+      transition: cubic-bezier(0.785, 0.135, 0.150, 0.860);
+}
+
+
+$ 배운거: 다양한 Transitions효과
+
+
+
+#4.2 Transformations (진짜 쩌는거)
+Transformations :
+말 그대로 한 요소를 transform(변형)시킬 수 있다.
+
+1) 이미지를 3d처럼 원하는 방향으로 변형시킬 수 있다.
+ex) img {
+      transform: rotateY(85deg) rotateX(20deg) rotateZ(10deg);
+}
+--> img를 y축을 기준으로 85만큼, x축을 기준으로 20만큼, z축을 기준으로 10만큼 회전시킨다.
+--> 아주아주 수많은 옵션이 존재한다.
+
+2) 이미지의 크기를 설정한다.
+ex) transform: scaleX(4) scaleY(12); or scale(2, 2);
+--> 크기를 2배씩 up한다.
+
+3) 이미지의 위치를 조정한다.
+ex) transform: translatex(-60px);
+--> translate는 transformation을 적용시키기는 하지만 다른 형제(sibling)를 변화시키진 않는다.
+ex) <img>
+    <span>hihihihi</span>
+위 코드가 존재할때
+img {
+  transform: translatex(200px);
+}
+위 css코드로 img의 위치를 변경해도 <span>은 영향받지 않는다.
+
+==> transformation은 box element를 변형시키지 않는다!!
+==> 일종의 3D transformation이기 때문에 margin, padding이 적용되지 않는다! (우린 px을 조정하고 있는것이다.)
+페이지의 다른 픽셀차원에서 일어나므로 <span>은 눈치채지 못한다. box차원에서 일어나는 것이 아니다!!!
+==> 즉, 다른 요소의 box를 변형시키지 않고 원하는 요소를 이동시키기 위해서 사용하는것이다.
+
+
+여러 transformation을 결합하기 :
+:hover과 같은 state등과 결합하여 애니메이션을 구현할 수 있다.
+ex)
+img:hover {
+        transform: rotateZ(90deg);
+}
+물론 transition을 사용하면 위 코드보다 더 정교한 애니메이션을 구현 가능하다.
+ex) 
+img {
+  transition: transform 5s ease-in-out;
+}
+img:hover {
+  transform: rotateZ(90deg);
+}
+--> transform mdm을 검색하여 더 많은 효과를 찾아 사용할 수 있다!!
+--> transition을 연결해야 반드시 어썸한 ani를 구현 가능하다!!!
+
+==> css의 모든 animation은 gpu로 구동된다.
+
+
+$ 배운거: transform의 개념/사용법, transform과 state, transition의 조합을 통한 어-썸한 효과 만들기!
+
+
+
+
+#4.3 Animations part One
+transition과 state를 결합하면 애니메이션 효과를 낼 수 있지만, 마우스를 올려야만 해당 기능을 볼 수 있다.
+--> 이제 진짜 animation을 다루어본다.
+
+coin flip 만들기 - @keyframes superSexyCoinFlip {
+}  :
+keyframes에는 두 가지 옵션이 있다.
+1) from - to :
+시작 - 목적지의 효과를 지정할 수 있다.
+ex)
+@keyframes superSexyCoinFlip {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(180deg) translateX(100px);    
+  }
+}
+img {
+  animation: superSexyCoinFlip 5s ease-in-out infinite;
+}
+--> keyframes로 애니메이션을 생성한 후 -> from-to로 단계를 설정하고 -> 사용하려는 root:tag에 animation을 사용하여 이름, 지속시간, 움직임, (무한)을 설정해주면 자동으로 실행된다.
+
+==> 하지만 위 방식은 애니메이션이 뚝뚝 끊겨서 별로 예쁘지 않다. 따라서 다음 노트의 방법을 사용한다.
+
+
+$ 배운거: animation사용법/ from - to설계
+
+
+#4.4 Animations part Two
+위 방식은 시작 -> 1단계 -> 원위치 형태이므로 animation이 뚝뚝 끊겨서 예쁘지 않다. 따라서 자연스러운 움직임을 구현하기 위해 복수적인 단계를 설정한다.
+2) %로 단계설정 :
+%단위로 단계를 설정할 수 있다.
+ex)
+@keyframes superSexyCoinFlip {
+  0% {
+    transform: rotateY(0);
+  }
+  50% {
+    transform: rotateY(180deg) translateY(100px);
+  }
+  100% {
+    transform: rotateY(0) translateY(0px);
+  }
+}
+img {
+  animation: superSexyCoinFlip 3s ease-in-out infinite;
+}
+--> 위 방법을 사용하면 자연스러운 animation효과를 구현할 수 있다.
+
+
+그럼 몇개의 step을 가질 수 있어요? :
+원하는 만큼!!!
+ex) 0 -> 25 -> 50 -> 75 -> 100;
+
+==> css animation mdn으로 검색하면 더 많은 정보를 볼 수 있다.
+
+
+$ 배운거 : %를 이용한 세부설계
+
+
+
+
+#4.5 Media Queries 
+Media Queries :
+오직 CSS만을 이용해서 (사용자의)스크린의 사이즈를 알 수 있는 방법이다.
+
+media query 사용 :
+@media screen and (max-width: 800px) {
+        div {
+          background-color: teal;
+        }
+}
+--> (사용자의)스크린의 크기가 800px보다 작으면 div의 색상이 teal로 변한다.
+
+@media screen and (min-width: 650px) and (max-width: 750px) {
+        div {
+          background-color: teal;
+        }
+}
+--> (사용자의)스크린의 크기가 650 ~ 750이면 teal로 색상이 적용된다.
+
+
+landscape(가로)/portrait(세로) :
+개발자 도구에서 "toogle device toolbar"를 선택하면 모바일 기종 + 가로/세로모드에 따라 보이는 화면을 test할 수 있다. screen조건에 가로/세로를 반영하는 것 역시 가능하다.
+ex)
+@media screen and (min-width: 601px) and (max-width: 1200px) and (orientation: landscape){
+        div {
+          background-color: wheat;
+        }
+}
+--> 화면크기가 601px ~ 1200px이며 landscape(가로모드)일때 div의 색상이 wheat로 적용된다.
+
+밑에와 같이 응용도 가능하다!!
+ex)
+<span>Please flip your phone :(</span>
+이때
+@media screen and (orientation: landscape) {
+        span {
+          display: none;
+        }
+}
+
+==> 이것이 바로 반응형 웹사이트이다!!!!
+
+
+$ 배운거: Media Query의 개념/사용법
+
+
+
+끝!!!!!
